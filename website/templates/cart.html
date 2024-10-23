@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Cart</title>
+</head>
+<body>
+    <h1>Your Cart</h1>
+    <ul>
+        {% for item in cart %}
+            <li>{{ item }}
+                <form action="{{ url_for('views.remove_item', index=loop.index0) }}" method="POST" style="display:inline;">
+                    <button type="submit">Remove</button>
+                </form>
+            </li>
+        {% endfor %}
+    </ul>
+    <form action="/add_item" method="POST">
+        <input type="text" name="item" placeholder="Add an item">
+        <button type="submit">Add to Cart</button>
+    </form>
+    <a href="{{ url_for('views.home') }}">Back to Home</a>
+</body>
+</html>
